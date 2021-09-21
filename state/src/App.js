@@ -6,6 +6,15 @@ function App(props) {
   // props are read only!
   // props.name = 'bar';
 
+
+  // 
+  const setInitialValue = () => {
+    console.log('set initial value');
+    return 0
+  }
+
+  // add a lazy initializer
+  // const [count, setCount] = useState(() => setInitialValue());
   // this uses array destructuring
   const [count, setCount] = useState(0);
   const [liked, setLiked] = useState(false);
@@ -22,7 +31,12 @@ function App(props) {
   const clickHandler = () => {
     // increment the state of count by 1
     // count = 2; ❌ don't mutate state directly
-    setCount(count + 1);
+
+    // setCount(count + 1);
+
+    // if we use the current state to calculate the new state it's preferred
+    // to pass a function to setState(function(prevState) => prevState + 1)
+    setCount(count => count + 1);
   }
 
   const likeHandler = () => setLiked(!liked)
